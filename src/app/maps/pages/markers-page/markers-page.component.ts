@@ -1,6 +1,8 @@
 import {  Component, ElementRef, ViewChild } from '@angular/core';
 import { LngLat, Map, Marker } from 'maplibre-gl';
 
+import { environment } from '../../../../environments/environments';
+
 interface MrkrAndColor {
   color: string;
   marker: Marker;
@@ -33,7 +35,7 @@ export class MarkersPageComponent  {
 
     this.map = new Map({
       container: this.divMap.nativeElement, // container ID
-      style: 'https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=rP1KZxFN992dnJmbSWCk', // style URL
+      style: `https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=${environment.maptiler_key}`, // style URL
       center: this.currentLngLat,
       zoom: 13
     });

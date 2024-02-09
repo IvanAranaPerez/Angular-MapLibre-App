@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LngLat, Map } from 'maplibre-gl';
 
+import { environment } from '../../../../environments/environments';
 
 @Component({
   templateUrl: './zoom-range-page.component.html',
@@ -25,13 +26,16 @@ export class ZoomRangePageComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngAfterViewInit() {
 
-    this.map = new Map({
-      container: this.mapContainer.nativeElement,
-      style: `https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=rP1KZxFN992dnJmbSWCk`,
-      center: this.lgnLat,
-      zoom: this.zoom
-    });
-    this.mapListeners();
+    if (typeof window !== 'undefined') {
+      this.map = new Map({
+        container: this.mapContainer.nativeElement,
+        style: `https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=${environment.maptiler_key}`,
+        center: this.lgnLat,
+        zoom: this.zoom
+      });
+      this.mapListeners();
+    }
+
   }
 
   ngOnDestroy(): void {
