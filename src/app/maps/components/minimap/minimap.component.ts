@@ -15,18 +15,19 @@ export class MinimapComponent {
     if( !this.divMap?.nativeElement ) throw "Map Div not found";
     if( !this.lngLat ) throw "LngLat can't be null";
 
-    const map = new Map({
-      container: this.divMap.nativeElement,
-      style: 'https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=rP1KZxFN992dnJmbSWCk',
-      center: this.lngLat,
-      zoom: 15,
-      interactive: false
-    });
+    if (typeof window !== 'undefined') {
+      const map = new Map({
+        container: this.divMap.nativeElement,
+        style: 'https://api.maptiler.com/maps/83a51e3e-0d44-44bd-9aa4-ab4bbddc0959/style.json?key=rP1KZxFN992dnJmbSWCk',
+        center: this.lngLat,
+        zoom: 15,
+        interactive: false
+      });
 
-    new Marker()
+      new Marker()
       .setLngLat( this.lngLat )
       .addTo( map )
-
+    }
   }
 }
 
